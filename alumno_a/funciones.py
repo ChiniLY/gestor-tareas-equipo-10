@@ -34,6 +34,8 @@ def ver_tareas(fichero):
                 count+=1
 
 def añadir_tarea(fichero):
-    """Añade una nueva tarea al fichero."""
-    # TODO: Implementar
-    pass
+    tarea=input("Indica la nueva tarea: ")
+
+    with open(fichero,"w") as txt:
+        txt.write(f"0|{tarea}\n")
+        print(Fore.GREEN+ "Tarea añadida correctamente")
