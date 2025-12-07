@@ -29,7 +29,7 @@ def ver_tareas(fichero):
                     print(f"{count}. " + Fore.YELLOW + f"[ ] {pendiente[1]} " + Style.RESET_ALL,)
                 elif "1" in linea:
                     completado=linea.strip().split("|")
-                    print(f"{count}. " + Fore.GREEN+ f"[ ] {completado[1].strip()} " + Style.RESET_ALL)
+                    print(f"{count}. " + Fore.GREEN+ f"[✓] {completado[1].strip()} " + Style.RESET_ALL)
 
                 count+=1
 
