@@ -13,9 +13,25 @@ def mostrar_menu():
     return opcion
 
 def ver_tareas(fichero):
-    """Muestra todas las tareas numeradas."""
-    # TODO: Implementar
-    pass
+    
+    with open(fichero,"r",encoding="utf-8") as txt:
+
+        contenido=txt.readlines()
+        count=1
+        ##Comprobar si hay tareas que hacer
+        if len(contenido)==0:
+            print(Fore.GREEN + "No tienes ninguna tarea que hacer :)")
+        else:
+            for linea in contenido:
+            
+                if "0" in linea:
+                    pendiente=linea.strip().split("|")
+                    print(f"{count}. " + Fore.YELLOW + f"[ ] {pendiente[1]} " + Style.RESET_ALL,)
+                elif "1" in linea:
+                    completado=linea.strip().split("|")
+                    print(f"{count}. " + Fore.GREEN+ f"[ ] {completado[1].strip()} " + Style.RESET_ALL)
+
+                count+=1
 
 def añadir_tarea(fichero):
     """Añade una nueva tarea al fichero."""
