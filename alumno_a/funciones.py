@@ -36,6 +36,6 @@ def ver_tareas(fichero):
 def añadir_tarea(fichero):
     tarea=input("Indica la nueva tarea: ")
 
-    with open(fichero,"w") as txt:
+    with open(fichero,"a") as txt:
         txt.write(f"0|{tarea}\n")
         print(Fore.GREEN+ "Tarea añadida correctamente")
