@@ -117,5 +117,8 @@ def eliminar_tarea(fichero):
 
 def despedida():
     """Muestra mensaje de despedida."""
-    # TODO: Implementar
-    pass
+    print(
+        Fore.MAGENTA
+        + "\n¡Saliendo del gestor de tareas! Hasta pronto."
+        + Style.RESET_ALL
+    )
