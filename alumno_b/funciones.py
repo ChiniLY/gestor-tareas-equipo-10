@@ -66,8 +66,53 @@ def marcar_completada(fichero):
 
 def eliminar_tarea(fichero):
     """Elimina una tarea del fichero."""
-    # TODO: Implementar
-    pass
+    print(Fore.RED + "\n--- ELIMINAR TAREA ---" + Style.RESET_ALL)
+
+    # Comprobamos si existe el fichero
+    if not os.path.exists(fichero):
+        print(Fore.RED + "No hay tareas para eliminar." + Style.RESET_ALL)
+        return
+
+    try:
+        # Leemos el fichero
+        with open(fichero, "r", encoding="utf-8") as f:
+            lineas = f.readlines()
+
+        if not lineas:
+            print(Fore.GREEN + "La lista ya está vacía :)" + Style.RESET_ALL)
+            return
+
+        # Mostramos la lista
+        print("Selecciona la tarea a eliminar:")
+        for i, linea in enumerate(lineas):
+            if "|" in linea:
+                datos = linea.strip().split("|")
+                estado_visual = "[✓]" if datos[0] == "1" else "[ ]"
+                color = Fore.GREEN if datos[0] == "1" else Fore.YELLOW
+                print(f"{color}{i+1}. {estado_visual} {datos[1]}{Style.RESET_ALL}")
+
+        # Lógica de borrado
+        try:
+            opcion = int(input(Style.RESET_ALL + "\nNúmero de tarea a eliminar: ")) - 1
+
+            if 0 <= opcion < len(lineas):
+                tarea_eliminada = lineas.pop(opcion)
+                nombre_tarea = tarea_eliminada.strip().split("|")[1]
+
+                with open(fichero, "w", encoding="utf-8") as f:
+                    f.writelines(lineas)
+                print(
+                    Fore.GREEN
+                    + f"✓ Tarea '{nombre_tarea}' eliminada correctamente."
+                    + Style.RESET_ALL
+                )
+            else:
+                print(Fore.RED + "Número inválido." + Style.RESET_ALL)
+        except ValueError:
+            print(Fore.RED + "Por favor, introduce un número válido." + Style.RESET_ALL)
+
+    except Exception as e:
+        print(Fore.RED + f"Error al procesar el archivo: {e}" + Style.RESET_ALL)
 
 
 def despedida():
